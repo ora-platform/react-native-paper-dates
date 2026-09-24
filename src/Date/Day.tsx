@@ -12,10 +12,12 @@ function EmptyDayPure() {
 
 export const EmptyDay = memo(EmptyDayPure)
 
-let caption: ((year: number, month: number, day: number) => string) | undefined
+export type DayCaption = (date: Date) => string
 
-/** Secondary line under each day number; `month` is 0-based like `Date`. */
-export function setDayCaption(fn: typeof caption) {
+let caption: DayCaption | undefined
+
+/** Secondary line under each day number; `undefined` removes it. */
+export function setDayCaption(fn: DayCaption | undefined) {
   caption = fn
 }
 
@@ -122,7 +124,7 @@ function Day(props: {
               style={{ color: finalTextColor, fontSize: 9, lineHeight: 11, opacity: 0.7 }}
               selectable={false}
             >
-              {caption(year, month, day)}
+              {caption(new Date(year, month, day))}
             </Text>
           ) : null}
         </View>
