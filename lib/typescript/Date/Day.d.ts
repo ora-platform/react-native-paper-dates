@@ -1,9 +1,9 @@
 import type { PaperTheme } from '../shared/utils';
 declare function EmptyDayPure(): import("react").JSX.Element;
 export declare const EmptyDay: import("react").MemoExoticComponent<typeof EmptyDayPure>;
-declare let caption: ((year: number, month: number, day: number) => string) | undefined;
-/** Secondary line under each day number; `month` is 0-based like `Date`. */
-export declare function setDayCaption(fn: typeof caption): void;
+export type DayCaption = (date: Date) => string;
+/** Secondary line under each day number; `undefined` removes it. */
+export declare function setDayCaption(fn: DayCaption | undefined): void;
 declare function Day(props: {
     theme: PaperTheme;
     textColorOnPrimary: string;
